@@ -8,12 +8,14 @@ public class Monster5DirectionShooter : MonoBehaviour {
     public float bulletSpeed = 3f;
     public float fireRate = 2f;
     private float nextFire;
+    private bool isDead = false;
 
     // Các góc bắn theo độ (tỏa ra 5 hướng)
     private float[] angles = { -30f, -15f, 0f, 15f, 30f };
 
     void Update()
     {
+        if (isDead) return; // if dead don't shoot
         if (Time.time >= nextFire)
         {
             Shoot5Directions();
@@ -34,8 +36,15 @@ public class Monster5DirectionShooter : MonoBehaviour {
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.velocity = direction * bulletSpeed;
+                rb.linearVelocity = direction * bulletSpeed;
             }
         }
+    }
+
+    //fix
+    public void OnDeath()
+    {
+        isDead = true;
+        enabled = false;
     }
 }

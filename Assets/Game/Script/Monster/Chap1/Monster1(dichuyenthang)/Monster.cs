@@ -88,10 +88,14 @@ public class Monster : MonoBehaviour
 		EffectPoolManager.Instance.SpawnEffect("explosion", effectPos, Quaternion.identity);
 		//
 		DropItemPoolManager.Instance.SpawnItem("Coin", transform.position);
-        Destroy(gameObject); // hoặc gameObject.SetActive(false) nếu dùng pooling quái
-		
+      //  Destroy(gameObject); // hoặc gameObject.SetActive(false) nếu dùng pooling quái
+        Monster5DirectionShooter shooter = GetComponent<Monster5DirectionShooter>();
+        if (shooter != null)
+        {
+            shooter.OnDeath();
+        }
         Debug.Log(gameObject.name + " has died!");
-        Destroy(gameObject);
+        Destroy(gameObject, 0.5f);
     }
 	
 	void UpdateUI()
