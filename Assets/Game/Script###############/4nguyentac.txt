@@ -1,7 +1,0 @@
-﻿1.Clean Code
-
-2.Module Hóa (Modularization)
-
-3.Hạn chế dùng Singleton
-
-4.Tuân thủ chuẩn SOLID
