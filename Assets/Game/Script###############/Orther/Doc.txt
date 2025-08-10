@@ -1,0 +1,6 @@
+Power Core I	Tăng sức mạnh đạn chính tạm thời	Lv1 trở lên
+Shield Fragment	Cung cấp một lớp khiên chắn	Lv2 trở lên
+Energy Battery I	Phục hồi năng lượng (dùng cho skill)	Lv3 trở lên
+Drone Chip	Gọi drone hỗ trợ bắn trong vài giây	Lv5 trở lên
+Critical Booster	Tăng tỉ lệ chí mạng trong thời gian ngắn	Lv7 trở lên
+Overheat Regulator	Giảm thời gian cooldown kỹ năng	Lv9 trở lên
