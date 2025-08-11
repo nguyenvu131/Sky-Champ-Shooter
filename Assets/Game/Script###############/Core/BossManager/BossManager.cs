@@ -18,7 +18,6 @@ public class BossManager : MonoBehaviour
     public List<BossWave> bossWaves = new List<BossWave>();
 
     private GameObject currentBoss;
-    public bool bossSpawned = false;
     private string currentWave = "";
 
 	public WaveManagerMonster waveManager;
@@ -42,7 +41,6 @@ public class BossManager : MonoBehaviour
     void OnWaveStarted(string waveName)
     {
         currentWave = waveName;
-        bossSpawned = false;
 
         BossWave bossWave = bossWaves.Find(b => b.waveName == waveName);
         if (bossWave != null)
@@ -64,8 +62,8 @@ public class BossManager : MonoBehaviour
 		}
 
 		currentBoss = Instantiate(bossWave.bossPrefab, bossWave.spawnPoint.position, Quaternion.identity);
-		bossSpawned = true;
-
+		PlayerShooting.Instance.playerShoot = false;
+        Invoke(nameof(PlayerShoot), 1f); 
 		// Đăng ký boss vào hệ thống wave
 		if (WaveManagerMonster.Instance != null)
 		{
@@ -74,7 +72,10 @@ public class BossManager : MonoBehaviour
 
 		Debug.Log("[BossManager] Boss spawned: " + bossWave.bossPrefab.name);
 	}
-
+    void PlayerShoot()
+    {
+        PlayerShooting.Instance.playerShoot = true;
+    }
     void OnBossDead()
     {
         Debug.Log("[BossManager] Boss defeated: " + currentWave);
@@ -84,7 +85,6 @@ public class BossManager : MonoBehaviour
             GameManager.Instance.OnBossDefeated(currentWave);
         }
 
-        bossSpawned = false;
         currentBoss = null;
     }
 

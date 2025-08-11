@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
+    public static PlayerShooting Instance;
+    private void OnEnable()
+    {
+        Instance = this;
+    }
+    private void OnDisable()
+    {
+        Instance = null;
+    }
+    public bool playerShoot = true;
+
     [Header("Fire Settings")]
     public Transform firePoint;
     public float fireRate = 0.3f;
@@ -38,11 +49,17 @@ public class PlayerShooting : MonoBehaviour
         if (!defaultBulletPrefab_Lv2) Debug.LogWarning("Không tìm thấy Bullet/PlayerBullet02 trong Resources!");
         if (!defaultBulletPrefab_Lv3) Debug.LogWarning("Không tìm thấy Bullet/PlayerBullet03 trong Resources!");
     }
-
     void Update()
     {
-        fireTimer += Time.deltaTime;
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            playerShoot = !playerShoot;
+        }
+#endif
 
+        fireTimer += Time.deltaTime;
+        if(playerShoot == false) return;
         if (fireTimer >= fireRate)
         {
             fireTimer = 0f;
